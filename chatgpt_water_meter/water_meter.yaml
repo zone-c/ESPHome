@@ -1,0 +1,21 @@
+external_components:
+  - source:
+      type: local
+      path: ./water_meter
+
+sensor:
+  - platform: custom
+    lambda: |-
+      auto wm = new esphome::water_meter::WaterMeterComponent();
+      App.register_component(wm);
+      return {wm->flow_sensor, wm->volume_sensor, wm->duration_sensor};
+    sensors:
+      - name: "Water Flow"
+        unit_of_measurement: "L/min"
+        accuracy_decimals: 2
+      - name: "Water Volume"
+        unit_of_measurement: "mL"
+        accuracy_decimals: 0
+      - name: "Flow Duration"
+        unit_of_measurement: "s"
+        accuracy_decimals: 0
